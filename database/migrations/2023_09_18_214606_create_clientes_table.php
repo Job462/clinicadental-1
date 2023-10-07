@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //Se creo la migracion de clientes en la base de datos
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',120);
