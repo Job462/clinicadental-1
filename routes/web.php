@@ -3,7 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use Inertia\Inertia;
+=======
+>>>>>>> c4d06c73b2c7f0b81404c7d292bd697af06e0915
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +19,7 @@ use Inertia\Inertia;
 |
 */
 
+<<<<<<< HEAD
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -34,5 +38,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+=======
+Route::view('/', 'welcome');
+
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+>>>>>>> c4d06c73b2c7f0b81404c7d292bd697af06e0915
 
 require __DIR__.'/auth.php';

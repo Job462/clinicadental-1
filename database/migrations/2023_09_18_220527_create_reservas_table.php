@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // fue creada la migracion de la base de datos a la tabla reservas
         Schema::create('reservas', function (Blueprint $table) {
             $table->id();
             $table->date('fecha');

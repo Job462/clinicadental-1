@@ -11,6 +11,7 @@ return new class extends Migration
      */
     //este es un comentario d para la migracion horarios
     // este es el segundo intento
+    // este es el tercer intento
     public function up(): void
     {
         Schema::create('horarios', function (Blueprint $table) {

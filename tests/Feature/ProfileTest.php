@@ -4,6 +4,10 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+<<<<<<< HEAD
+=======
+use Livewire\Volt\Volt;
+>>>>>>> c4d06c73b2c7f0b81404c7d292bd697af06e0915
 use Tests\TestCase;
 
 class ProfileTest extends TestCase
@@ -14,17 +18,28 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
+<<<<<<< HEAD
         $response = $this
             ->actingAs($user)
             ->get('/profile');
 
         $response->assertOk();
+=======
+        $response = $this->actingAs($user)->get('/profile');
+
+        $response
+            ->assertSeeVolt('profile.update-profile-information-form')
+            ->assertSeeVolt('profile.update-password-form')
+            ->assertSeeVolt('profile.delete-user-form')
+            ->assertOk();
+>>>>>>> c4d06c73b2c7f0b81404c7d292bd697af06e0915
     }
 
     public function test_profile_information_can_be_updated(): void
     {
         $user = User::factory()->create();
 
+<<<<<<< HEAD
         $response = $this
             ->actingAs($user)
             ->patch('/profile', [
@@ -35,6 +50,18 @@ class ProfileTest extends TestCase
         $response
             ->assertSessionHasNoErrors()
             ->assertRedirect('/profile');
+=======
+        $this->actingAs($user);
+
+        $component = Volt::test('profile.update-profile-information-form')
+            ->set('name', 'Test User')
+            ->set('email', 'test@example.com')
+            ->call('updateProfileInformation');
+
+        $component
+            ->assertHasNoErrors()
+            ->assertNoRedirect();
+>>>>>>> c4d06c73b2c7f0b81404c7d292bd697af06e0915
 
         $user->refresh();
 
@@ -47,6 +74,7 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
+<<<<<<< HEAD
         $response = $this
             ->actingAs($user)
             ->patch('/profile', [
@@ -57,6 +85,18 @@ class ProfileTest extends TestCase
         $response
             ->assertSessionHasNoErrors()
             ->assertRedirect('/profile');
+=======
+        $this->actingAs($user);
+
+        $component = Volt::test('profile.update-profile-information-form')
+            ->set('name', 'Test User')
+            ->set('email', $user->email)
+            ->call('updateProfileInformation');
+
+        $component
+            ->assertHasNoErrors()
+            ->assertNoRedirect();
+>>>>>>> c4d06c73b2c7f0b81404c7d292bd697af06e0915
 
         $this->assertNotNull($user->refresh()->email_verified_at);
     }
@@ -65,6 +105,7 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
+<<<<<<< HEAD
         $response = $this
             ->actingAs($user)
             ->delete('/profile', [
@@ -73,6 +114,16 @@ class ProfileTest extends TestCase
 
         $response
             ->assertSessionHasNoErrors()
+=======
+        $this->actingAs($user);
+
+        $component = Volt::test('profile.delete-user-form')
+            ->set('password', 'password')
+            ->call('deleteUser');
+
+        $component
+            ->assertHasNoErrors()
+>>>>>>> c4d06c73b2c7f0b81404c7d292bd697af06e0915
             ->assertRedirect('/');
 
         $this->assertGuest();
@@ -83,6 +134,7 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
+<<<<<<< HEAD
         $response = $this
             ->actingAs($user)
             ->from('/profile')
@@ -93,6 +145,17 @@ class ProfileTest extends TestCase
         $response
             ->assertSessionHasErrors('password')
             ->assertRedirect('/profile');
+=======
+        $this->actingAs($user);
+
+        $component = Volt::test('profile.delete-user-form')
+            ->set('password', 'wrong-password')
+            ->call('deleteUser');
+
+        $component
+            ->assertHasErrors('password')
+            ->assertNoRedirect();
+>>>>>>> c4d06c73b2c7f0b81404c7d292bd697af06e0915
 
         $this->assertNotNull($user->fresh());
     }
