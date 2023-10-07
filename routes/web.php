@@ -1,9 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ReservaController;
-use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\HorarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,15 +13,14 @@ use App\Http\Controllers\HorarioController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome');
 
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-Auth::routes();
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/reservas',ReservaController::class);
-Route::resource('/clientes',ClienteController::class);
-Route::resource('/horarios',HorarioController::class);
- Route::get('/reporte-reservas', 'ReporteController@generarReporte'); 
+require __DIR__.'/auth.php';
