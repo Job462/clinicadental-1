@@ -1,73 +1,64 @@
 @extends('layouts.app')
+@section('title','Login')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title') - Larabel App </title>
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+</head> 
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ asset('images/54.png')}}" alt="">
+            <h2>Clinica Dental Sonrisitas</h2>
+        </div>
+        <nav class="navigation">
+            <a href="">Inicio</a>
+            <a href="">Reservas</a>
+            <a href="">Servicios</a>
+            <a href="#" class="btn btnLogin">Iniciar Sesión</a>
+            <a href="{{ route('register.index') }}" class="btn btnRegister">Registrarse</a>
+        </nav>
+    </header>
+    <img class='img' src="{{ asset('images/background.jpg') }}" alt="">
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+    
+    <div class="wrapper">
+        <div class="form-box login">
+            <h2>Iniciar Sesión</h2>
+            <form action="" method="post">
+                @csrf
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" required>
+                    <label>Correo Electronico</label>
                 </div>
-            </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Contraseña</label>
+                </div>
+                
+                <div class="remember-forgot">
+                    <label><input type="checkbox">Recuerdame</label>
+                    <a href="#">Olvidaste tu Contraseña?</a>
+
+                </div>
+                <button class="btn1" type="submit">Ingresar</button>
+                <div class="login-register">
+                    <p>No tienes una cuenta? <a href="#" class="register-link">Registrarse</a></p>
+                </div>
+
+            </form>
         </div>
     </div>
-</div>
-@endsection
+
+
+</body> 
+

@@ -1,12 +1,24 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <nav>
-        <a href="clientes/">clientes</a> <br>
-        <a href="reservas/">reservas</a> <br>
-        <a href="horarios/">horarios</a> <br>
-        <a href="{{ url('/reporte-reservas') }}" target="_blank" class="btn btn-primary">Descargar Reporte</a>
-    </nav>
-</div>  
-@endsection
+@section('title','Home')
+
+
+<body>
+    
+    <header>
+        <h2 class="logo">Clinica Dental Sonrisitas</h2>
+        <nav class="navigation">
+            <a href="">Inicio</a>
+            <a href="">Reservas</a>
+            <a href="">Servicios</a>
+            <a href="{{ route('login.index') }}" class="btn btnLogin">Iniciar Sesión</a>
+            <a href="{{ route('register.index') }}" class="btn btnRegister">Registrarse</a>
+        </nav>
+    </header>
+    <img class='img' src="{{ asset('images/background.jpg') }}" alt="">
+    
+    
+
+
+
+</body>
