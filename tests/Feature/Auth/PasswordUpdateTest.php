@@ -5,7 +5,10 @@ namespace Tests\Feature\Auth;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
+<<<<<<< HEAD
+=======
 use Livewire\Volt\Volt;
+>>>>>>> c4d06c73b2c7f0b81404c7d292bd697af06e0915
 use Tests\TestCase;
 
 class PasswordUpdateTest extends TestCase
@@ -16,6 +19,20 @@ class PasswordUpdateTest extends TestCase
     {
         $user = User::factory()->create();
 
+<<<<<<< HEAD
+        $response = $this
+            ->actingAs($user)
+            ->from('/profile')
+            ->put('/password', [
+                'current_password' => 'password',
+                'password' => 'new-password',
+                'password_confirmation' => 'new-password',
+            ]);
+
+        $response
+            ->assertSessionHasNoErrors()
+            ->assertRedirect('/profile');
+=======
         $this->actingAs($user);
 
         $component = Volt::test('profile.update-password-form')
@@ -27,6 +44,7 @@ class PasswordUpdateTest extends TestCase
         $component
             ->assertHasNoErrors()
             ->assertNoRedirect();
+>>>>>>> c4d06c73b2c7f0b81404c7d292bd697af06e0915
 
         $this->assertTrue(Hash::check('new-password', $user->refresh()->password));
     }
@@ -35,6 +53,20 @@ class PasswordUpdateTest extends TestCase
     {
         $user = User::factory()->create();
 
+<<<<<<< HEAD
+        $response = $this
+            ->actingAs($user)
+            ->from('/profile')
+            ->put('/password', [
+                'current_password' => 'wrong-password',
+                'password' => 'new-password',
+                'password_confirmation' => 'new-password',
+            ]);
+
+        $response
+            ->assertSessionHasErrors('current_password')
+            ->assertRedirect('/profile');
+=======
         $this->actingAs($user);
 
         $component = Volt::test('profile.update-password-form')
@@ -46,5 +78,6 @@ class PasswordUpdateTest extends TestCase
         $component
             ->assertHasErrors(['current_password'])
             ->assertNoRedirect();
+>>>>>>> c4d06c73b2c7f0b81404c7d292bd697af06e0915
     }
 }
